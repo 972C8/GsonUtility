@@ -8,8 +8,18 @@ import java.util.ArrayList;
 public class ReadWriteArrayList extends BaseReadWrite {
 
     @Override
-    public void write(Object o) {
+    public void write(Object o) throws Exception {
 
+        //TODO: Remove and check through parameter type declaration
+        if (!(o instanceof ArrayList)) {
+            throw new Exception("Object must be of type ArrayList");
+        }
+
+        try {
+            writeToFile(o);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
     }
 
     @Override

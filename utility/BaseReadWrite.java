@@ -2,7 +2,9 @@ package utility;
 
 import com.google.gson.Gson;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -13,7 +15,36 @@ public abstract class BaseReadWrite {
 
     protected String location = null;
 
-    protected void writeToFile() {
+    protected void writeToFile(Object o) throws Exception {
+        //Create new file if it doesn't exist yet
+        File file = new File(location);
+        if (!file.exists()) {
+            try {
+                File directory = new File(file.getParent());
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+                file.createNewFile();
+            } catch (Exception e) {
+                throw new Exception(e);
+            }
+        }
+
+        //Write object to file
+        try {
+            //Get JSON string of object
+            String json = gson.toJson(o);
+
+            //Write JSON to file
+            FileWriter writer = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bufferWriter = new BufferedWriter(writer);
+            bufferWriter.write(json);
+            bufferWriter.close();
+        } catch (IOException e) {
+            throw new IOException(e);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
     }
 
     protected String readFromFile() throws Exception {
@@ -25,8 +56,7 @@ public abstract class BaseReadWrite {
         File file = new File(location);
         if (!file.exists()) throw new IOException("Invalid file location.");
         try {
-            String fileContent = Files.readString(Paths.get(location));
-            return fileContent;
+            return Files.readString(Paths.get(location));
         } catch (Exception e) {
             throw new Exception(e);
         }
@@ -40,7 +70,7 @@ public abstract class BaseReadWrite {
         return this.location;
     }
 
-    public abstract void write(Object o);
+    public abstract void write(Object o) throws Exception;
 
     public abstract <T> Object read() throws Exception;
 }
