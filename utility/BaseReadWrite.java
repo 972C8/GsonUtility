@@ -9,13 +9,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public abstract class BaseReadWrite {
+public abstract class BaseReadWrite<T> {
 
     protected static final Gson gson = new Gson();
 
     protected String location = null;
 
-    protected void writeToFile(Object o) throws Exception {
+    protected void writeToFile(T o) throws Exception {
         //Create new file if it doesn't exist yet
         File file = new File(location);
         if (!file.exists()) {
@@ -30,9 +30,9 @@ public abstract class BaseReadWrite {
             }
         }
 
-        //Write object to file
+        //Write T to file
         try {
-            //Get JSON string of object
+            //Get JSON string of T
             String json = gson.toJson(o);
 
             //Write JSON to file
@@ -70,7 +70,7 @@ public abstract class BaseReadWrite {
         return this.location;
     }
 
-    public abstract void write(Object o) throws Exception;
+    public abstract void write(T o) throws Exception;
 
-    public abstract <T> Object read() throws Exception;
+    public abstract T read() throws Exception;
 }

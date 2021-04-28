@@ -1,12 +1,18 @@
 package tests;
 
 import utility.ReadWriteArrayList;
+
 import java.util.ArrayList;
 
 class ReadWriteArrayListTest {
 
+    private ReadWriteArrayList<TestClass> readWriteObject;
+    private String location;
+
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
+        readWriteObject = new ReadWriteArrayList<TestClass>();
+        location = System.getProperty("user.dir") + "/tests/test.json";
     }
 
     @org.junit.jupiter.api.AfterEach
@@ -14,17 +20,20 @@ class ReadWriteArrayListTest {
     }
 
     @org.junit.jupiter.api.Test
-    void write() {
+    void write() throws Exception {
+        readWriteObject.setLocation(location);
+        ArrayList<TestClass> testObject = new ArrayList<>();
+        testObject.add(new TestClass(1, "john"));
+        testObject.add(new TestClass(2, "doe"));
+
+        readWriteObject.write(testObject);
     }
 
     @org.junit.jupiter.api.Test
     void read() throws Exception {
-        ReadWriteArrayList obj = new ReadWriteArrayList();
+        readWriteObject.setLocation(location);
+        ArrayList<TestClass> testObject = readWriteObject.read();
 
-        String location = System.getProperty("user.dir") + "/test.json";
-        obj.setLocation(location);
-
-        ArrayList<Object> object = obj.read();
-        System.out.println(object);
+        System.out.println(testObject);
     }
 }

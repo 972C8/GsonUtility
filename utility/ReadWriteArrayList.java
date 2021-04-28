@@ -5,16 +5,11 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ReadWriteArrayList extends BaseReadWrite {
+public class ReadWriteArrayList<T> extends BaseReadWrite<ArrayList<T>> {
+
 
     @Override
-    public void write(Object o) throws Exception {
-
-        //TODO: Remove and check through parameter type declaration
-        if (!(o instanceof ArrayList)) {
-            throw new Exception("Object must be of type ArrayList");
-        }
-
+    public void write(ArrayList<T> o) throws Exception {
         try {
             writeToFile(o);
         } catch (Exception e) {
@@ -23,7 +18,7 @@ public class ReadWriteArrayList extends BaseReadWrite {
     }
 
     @Override
-    public <T> ArrayList<T> read() throws Exception {
+    public ArrayList<T> read() throws Exception {
         try {
             String fileContent = readFromFile();
             return gson.fromJson(fileContent, new TypeToken<ArrayList<T>>() {
