@@ -11,7 +11,7 @@ class ReadWriteArrayListTest {
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
-        readWriteObject = new ReadWriteArrayList<TestClass>();
+        readWriteObject = new ReadWriteArrayList<>();
         location = System.getProperty("user.dir") + "/tests/test.json";
     }
 
