@@ -2,12 +2,14 @@
 
 GsonUtility is a Java library providing a generic implementation of https://github.com/google/gson to convert Java Objects into JSON or JSON strings to an equivalent Java Object.
 
+This generic implementation already works out-of-the-box. You only need to specify your desired object type. Check example classes in utility to get a quick start.
+
 ### Goal
 * Provide a generic abstract class to handle conversion for you
 * Provide subclasses for different object types to simplify conversion with a `write()` and `read()` method
-* Custom subclasses can be extended from the abstract class to support custom objects
+* Custom subclasses can be extended from the abstract base class to support custom objects
 
-### Object types already supported out-of-the-box
+### Working examples included for:
 * ArrayList\<T>
 * HashMap<K,V>
 
