@@ -12,6 +12,7 @@ This generic implementation already works out-of-the-box. You only need to speci
 ### Working examples included for:
 * ArrayList\<T>
 * HashMap<K,V>
+* Object
 
 ### Example
 
