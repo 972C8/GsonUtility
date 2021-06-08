@@ -7,19 +7,32 @@ GsonUtility is a Java library providing a generic implementation of https://gith
 * Provide subclasses for different object types to simplify conversion with a `write()` and `read()` method
 * Custom subclasses can be extended from the abstract class to support custom objects
 
+### Object types already supported out-of-the-box
+* ArrayList\<T>
+* HashMap<K,V>
+
 ### Example
 
 Read JSON and convert to ArrayList:
 ```
 ReadWriteArrayList<TestClass> readWriteObject = new ReadWriteArrayList<>();
-readWriteObject.setLocation(System.getProperty("user.dir") + "/tests/test.json");
+readWriteObject.setLocation(System.getProperty("user.dir") + "/tests/arraylist.json");
 
 ArrayList<TestClass> testObject = readWriteObject.read();
 System.out.println(testObject);
 ```
 
-### Object types already supported out-of-the-box
-* ArrayList<T>
+Write ArrayList to JSON:
+```
+ReadWriteArrayList<TestClass> readWriteObject = new ReadWriteArrayList<>();
+readWriteObject.setLocation(System.getProperty("user.dir") + "/tests/arraylist.json");
+
+ArrayList<TestClass> testObject = new ArrayList<>();
+testObject.add(new TestClass(1, "john"));
+testObject.add(new TestClass(2, "doe"));
+
+readWriteObject.write(testObject);
+```
 
 ### Contributing
 
