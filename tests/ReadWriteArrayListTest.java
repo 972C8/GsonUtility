@@ -12,7 +12,7 @@ class ReadWriteArrayListTest {
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
         readWriteObject = new ReadWriteArrayList<>();
-        location = System.getProperty("user.dir") + "/tests/test.json";
+        location = System.getProperty("user.dir") + "/tests/arraylist.json";
     }
 
     @org.junit.jupiter.api.AfterEach
@@ -34,6 +34,6 @@ class ReadWriteArrayListTest {
         readWriteObject.setLocation(location);
         ArrayList<TestClass> testObject = readWriteObject.read();
 
-        System.out.println(testObject);
+        System.out.println("Read result: " + testObject);
     }
 }
